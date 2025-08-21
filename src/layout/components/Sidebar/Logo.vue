@@ -2,11 +2,11 @@
   <div class="sidebar-logo-container" :class="{ 'collapse': collapse }">
     <transition name="sidebarLogoFade">
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo" />
+        <img v-if="currentLogo" :src="currentLogo" class="sidebar-logo" />
         <h1 v-else class="sidebar-title">{{ title }}</h1>
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo" />
+        <img v-if="currentLogo" :src="currentLogo" class="sidebar-logo" />
         <h1 class="sidebar-title">{{ title }}</h1>
       </router-link>
     </transition>
@@ -14,7 +14,8 @@
 </template>
 
 <script setup>
-import logo from '@/assets/logo/logo.png'
+import lightLogo from '@/assets/logo/logo-light.png'
+import darkLogo from '@/assets/logo/logo-dark.png'
 import useSettingsStore from '@/store/modules/settings'
 import variables from '@/assets/styles/variables.module.scss'
 
@@ -35,6 +36,11 @@ const getLogoBackground = computed(() => {
     return 'var(--sidebar-bg)'
   }
   return sideTheme.value === 'theme-dark' ? variables.menuBg : variables.menuLightBg
+})
+
+// 根据主题自动切换logo
+const currentLogo = computed(() => {
+  return settingsStore.isDark ? darkLogo : lightLogo
 })
 
 // 获取Logo文字颜色

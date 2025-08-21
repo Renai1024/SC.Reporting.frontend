@@ -83,6 +83,11 @@ export const constantRoutes = [
         meta: { title: '个人中心', icon: 'user' }
       }
     ]
+  },
+  {
+    path: '/report/mes/product',
+    component: () => import('@/views/extra/mes_report_iqc/index.vue'),
+    hidden: true
   }
 ]
 
