@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router'
 /* Layout */
 import Layout from '@/layout'
+import {useDark} from "@vueuse/core";
 
 /**
  * Note: 路由配置项
@@ -87,6 +88,15 @@ export const constantRoutes = [
   {
     path: '/report/mes/product',
     component: () => import('@/views/extra/mes_report_iqc/index.vue'),
+    hidden: true,
+    meta: {
+      title: '检验记录报表',
+      requireLight: true
+    }
+  },
+  {
+    path: '/report/mes/inspection_record',
+    component: () => import('@/views/extra/mes_inspection_record/report.vue'),
     hidden: true
   }
 ]
@@ -175,5 +185,20 @@ const router = createRouter({
     return { top: 0 }
   },
 })
+
+// export function createThemeGuard(router) {
+//   const isDark = useDark()
+//
+//   router.beforeEach((to, from, next) => {
+//     // 根据路由元信息设置主题
+//     if (to.meta.requireLight) {
+//       isDark.value = false
+//     } else {
+//       // 如果没有特别指定，使用默认暗黑模式
+//       isDark.value = true
+//     }
+//     next()
+//   })
+// }
 
 export default router

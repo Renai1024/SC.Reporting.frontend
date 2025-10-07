@@ -55,6 +55,34 @@
             </div>
           </template>
           <el-collapse accordion>
+            <el-collapse-item title="v1.8.0 - 2025-09-30">
+              <ol>
+                <li>新增PDA扫码追溯</li>
+                <li>新增箱码绑定</li>
+                <li>新增检验记录追溯报表</li>
+                <li>报表取消鉴权</li>
+              </ol>
+            </el-collapse-item>
+            <el-collapse-item title="v1.7.0 - 2025-09-11">
+              <ol>
+                <li>新增定时任务：调用PLM项目信息接口</li>
+                <li>新增PLM项目报表</li>
+              </ol>
+            </el-collapse-item>
+            <el-collapse-item title="v1.6.0 - 2025-09-08">
+              <ol>
+                <li>新增收料通知单报表</li>
+              </ol>
+            </el-collapse-item>
+            <el-collapse-item title="v1.5.0 - 2025-08-26">
+              <ol>
+                <li>IQC报表前端UI优化</li>
+                <li>IQC报表数据库字段长度优化</li>
+                <li>后端updatePwd接口修复</li>
+                <li>用户重置密码功能修复</li>
+                <li>其他细节优化</li>
+              </ol>
+            </el-collapse-item>
             <el-collapse-item title="v1.4.0 - 2025-08-02">
               <ol>
                 <li>新增MES IQC生产数据报表</li>
@@ -100,7 +128,7 @@
 </template>
 
 <script setup name="Index">
-const version = ref('1.4.0')
+const version = ref('1.7.0')
 
 function goTarget(url) {
   window.open(url, '__blank')

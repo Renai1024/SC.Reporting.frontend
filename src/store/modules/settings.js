@@ -2,7 +2,11 @@ import defaultSettings from '@/settings'
 import { useDark, useToggle } from '@vueuse/core'
 import { useDynamicTitle } from '@/utils/dynamicTitle'
 
-const isDark = useDark()
+const isDark = useDark({
+  valueDark: 'dark',
+  valueLight: 'light',
+  initialValue: 'dark'
+})
 const toggleDark = useToggle(isDark)
 
 const { sideTheme, showSettings, topNav, tagsView, tagsIcon, fixedHeader, sidebarLogo, dynamicTitle, footerVisible, footerContent } = defaultSettings
@@ -25,7 +29,8 @@ const useSettingsStore = defineStore(
       dynamicTitle: storageSetting.dynamicTitle === undefined ? dynamicTitle : storageSetting.dynamicTitle,
       footerVisible: storageSetting.footerVisible === undefined ? footerVisible : storageSetting.footerVisible,
       footerContent: footerContent,
-      isDark: isDark.value
+      isDark: storageSetting.isDark === undefined ? true : storageSetting.isDark,
+      // isDark: isDark.value
     }),
     actions: {
       // 修改布局设置
