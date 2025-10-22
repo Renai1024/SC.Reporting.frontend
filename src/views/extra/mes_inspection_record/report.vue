@@ -109,15 +109,23 @@
 <!--          v-hasPermi="['extra:mes_inspection_record:remove']"-->
 <!--        >删除</el-button>-->
 <!--      </el-col>-->
-<!--      <el-col :span="1.5">-->
-<!--        <el-button-->
+      <el-col :span="1.5">
+        <el-button
+          type="warning"
+          plain
+          icon="Download"
+          @click="handleExport"
+        >导出</el-button>
+      </el-col>
+<!--    <el-col :span="1.5">-->
+<!--      <el-button-->
 <!--          type="warning"-->
 <!--          plain-->
 <!--          icon="Download"-->
 <!--          @click="handleExport"-->
 <!--          v-hasPermi="['extra:mes_inspection_record:export']"-->
-<!--        >导出</el-button>-->
-<!--      </el-col>-->
+<!--      >导出</el-button>-->
+<!--    </el-col>-->
 <!--      <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>-->
 <!--    </el-row>-->
 
@@ -145,9 +153,9 @@
           <dict-tag :options="sys_test_result" :value="scope.row.result2"/>
         </template>
       </el-table-column>
-      <el-table-column label="47.5尺寸检验时间" align="center" prop="createTime2" min-width="140px" show-overflow-tooltip>
+      <el-table-column label="47.5尺寸检验时间" align="center" prop="createTime1" min-width="140px" show-overflow-tooltip>
         <template #default="scope">
-          <span>{{ parseTime(scope.row.createTime2, '{y}-{m}-{d} {h}:{m}:{s}') }}</span>
+          <span>{{ parseTime(scope.row.createTime1, '{y}-{m}-{d} {h}:{m}:{s}') }}</span>
         </template>
       </el-table-column>
 <!--      <el-table-column label="47.5尺寸检验人" align="center" prop="createBy2" min-width="140px" show-overflow-tooltip/>-->
@@ -156,9 +164,9 @@
           <dict-tag :options="sys_test_result" :value="scope.row.result3"/>
         </template>
       </el-table-column>
-      <el-table-column label="610尺寸检验时间" align="center" prop="createTime3" min-width="140px" show-overflow-tooltip>
+      <el-table-column label="610尺寸检验时间" align="center" prop="createTime2" min-width="140px" show-overflow-tooltip>
         <template #default="scope">
-          <span>{{ parseTime(scope.row.createTime3, '{y}-{m}-{d} {h}:{m}:{s}') }}</span>
+          <span>{{ parseTime(scope.row.createTime2, '{y}-{m}-{d} {h}:{m}:{s}') }}</span>
         </template>
       </el-table-column>
 <!--      <el-table-column label="610尺寸检验人" align="center" prop="createBy3" min-width="140px" show-overflow-tooltip/>-->
@@ -167,14 +175,19 @@
           <dict-tag :options="sys_test_result" :value="scope.row.appearanceInspection"/>
         </template>
       </el-table-column>
-      <el-table-column label="箱码" align="center" prop="boxCode" min-width="140px" show-overflow-tooltip/>
-      <el-table-column label="客户箱码" align="center" prop="customerBoxCode" min-width="140px" show-overflow-tooltip/>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="外观检验时间" align="center" prop="createTime3" min-width="140px" show-overflow-tooltip>
         <template #default="scope">
-<!--          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['extra:mes_inspection_record:edit']">修改</el-button>-->
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['extra:mes_inspection_record:remove']">删除</el-button>
+          <span>{{ parseTime(scope.row.createTime3, '{y}-{m}-{d} {h}:{m}:{s}') }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="箱码" align="center" prop="boxCode" min-width="140px" show-overflow-tooltip/>
+      <el-table-column label="客户箱码" align="center" prop="customerBoxCode" min-width="140px" show-overflow-tooltip/>
+<!--      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">-->
+<!--        <template #default="scope">-->
+<!--&lt;!&ndash;          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['extra:mes_inspection_record:edit']">修改</el-button>&ndash;&gt;-->
+<!--          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['extra:mes_inspection_record:remove']">删除</el-button>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
     </el-table>
     
     <pagination
@@ -457,9 +470,9 @@ function handleDelete(row) {
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('extra/mes_inspection_record/export', {
+  proxy.download('extra/mes/report/mes_inspection_record/export', {
     ...queryParams.value
-  }, `mes_inspection_record_${new Date().getTime()}.xlsx`)
+  }, `检验结果报表导出_${new Date().getTime()}.xlsx`)
 }
 
 getList();
