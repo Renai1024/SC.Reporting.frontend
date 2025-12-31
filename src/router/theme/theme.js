@@ -8,7 +8,13 @@ export function useRouteTheme() {
 
     // 需要亮色模式的路由配置
     const lightModeRoutes = [
-        '/report/mes/inspection_record'
+        '/report/mes/inspection_record',
+        '/report/mes/torque',
+        '/report/mes/weld_record',
+        '/report/mes/byd',
+        '/report/mes/qimixing',
+        '/report/mes/duanziyajieji',
+        '/report/mes/transpose'
     ]
 
     const setThemeByRoute = (path = null) => {

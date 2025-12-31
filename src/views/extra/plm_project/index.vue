@@ -80,35 +80,6 @@
     </el-form>
 
     <el-row :gutter="10" class="mb8">
-<!--      <el-col :span="1.5">-->
-<!--        <el-button-->
-<!--          type="primary"-->
-<!--          plain-->
-<!--          icon="Plus"-->
-<!--          @click="handleAdd"-->
-<!--          v-hasPermi="['extra:plm_project:add']"-->
-<!--        >新增</el-button>-->
-<!--      </el-col>-->
-<!--      <el-col :span="1.5">-->
-<!--        <el-button-->
-<!--          type="success"-->
-<!--          plain-->
-<!--          icon="Edit"-->
-<!--          :disabled="single"-->
-<!--          @click="handleUpdate"-->
-<!--          v-hasPermi="['extra:plm_project:edit']"-->
-<!--        >修改</el-button>-->
-<!--      </el-col>-->
-<!--      <el-col :span="1.5">-->
-<!--        <el-button-->
-<!--          type="danger"-->
-<!--          plain-->
-<!--          icon="Delete"-->
-<!--          :disabled="multiple"-->
-<!--          @click="handleDelete"-->
-<!--          v-hasPermi="['extra:plm_project:remove']"-->
-<!--        >删除</el-button>-->
-<!--      </el-col>-->
       <el-col :span="1.5">
         <el-button
           type="warning"
@@ -148,6 +119,7 @@
       <el-table-column label="项目状态" align="center" prop="projectState" min-width="160" show-overflow-tooltip/>
       <el-table-column label="项目经理" align="center" prop="projectManager" min-width="160" show-overflow-tooltip/>
       <el-table-column label="项目计划达成率" align="center" prop="projectCompletedOnScheduleCount" min-width="160" show-overflow-tooltip/>
+      <el-table-column label="项目标记" align="center" prop="projectMark" min-width="160" show-overflow-tooltip/>
 <!--      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">-->
 <!--        <template #default="scope">-->
 <!--          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['extra:plm_project:edit']">修改</el-button>-->
@@ -155,7 +127,7 @@
 <!--        </template>-->
 <!--      </el-table-column>-->
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -164,59 +136,7 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改PLM项目对话框 -->
-    <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="plm_projectRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="项目编码" prop="projectNumber">
-          <el-input v-model="form.projectNumber" placeholder="请输入项目编码" />
-        </el-form-item>
-        <el-form-item label="项目名称" prop="projectName">
-          <el-input v-model="form.projectName" placeholder="请输入项目名称" />
-        </el-form-item>
-        <el-form-item label="事业部" prop="businessDivision">
-          <el-input v-model="form.businessDivision" placeholder="请输入事业部" />
-        </el-form-item>
-        <el-form-item label="计划开始时间" prop="projectPlanStartTime">
-          <el-date-picker clearable
-            v-model="form.projectPlanStartTime"
-            type="date"
-            value-format="YYYY-MM-DD"
-            placeholder="请选择计划开始时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="实际开始时间" prop="projectActualStartTime">
-          <el-date-picker clearable
-            v-model="form.projectActualStartTime"
-            type="date"
-            value-format="YYYY-MM-DD"
-            placeholder="请选择实际开始时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="实际结束时间" prop="projectActualEndTime">
-          <el-date-picker clearable
-            v-model="form.projectActualEndTime"
-            type="date"
-            value-format="YYYY-MM-DD"
-            placeholder="请选择实际结束时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="项目状态" prop="projectState">
-          <el-input v-model="form.projectState" placeholder="请输入项目状态" />
-        </el-form-item>
-        <el-form-item label="项目经理" prop="projectManager">
-          <el-input v-model="form.projectManager" placeholder="请输入项目经理" />
-        </el-form-item>
-        <el-form-item label="项目计划达成率" prop="projectCompletedOnScheduleCount">
-          <el-input v-model="form.projectCompletedOnScheduleCount" placeholder="请输入项目计划达成率" />
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="primary" @click="submitForm">确 定</el-button>
-          <el-button @click="cancel">取 消</el-button>
-        </div>
-      </template>
-    </el-dialog>
+
   </div>
 </template>
 
@@ -248,7 +168,8 @@ const data = reactive({
     projectActualEndTime: null,
     projectState: null,
     projectManager: null,
-    projectCompletedOnScheduleCount: null
+    projectCompletedOnScheduleCount: null,
+    projectMark: null
   },
   rules: {
   }
@@ -284,7 +205,8 @@ function reset() {
     projectActualEndTime: null,
     projectState: null,
     projectManager: null,
-    projectCompletedOnScheduleCount: null
+    projectCompletedOnScheduleCount: null,
+    projectMark: null
   };
   proxy.resetForm("plm_projectRef");
 }
@@ -308,55 +230,7 @@ function handleSelectionChange(selection) {
   multiple.value = !selection.length;
 }
 
-/** 新增按钮操作 */
-function handleAdd() {
-  reset();
-  open.value = true;
-  title.value = "添加PLM项目";
-}
 
-/** 修改按钮操作 */
-function handleUpdate(row) {
-  reset();
-  const _id = row.id || ids.value
-  getPlm_project(_id).then(response => {
-    form.value = response.data;
-    open.value = true;
-    title.value = "修改PLM项目";
-  });
-}
-
-/** 提交按钮 */
-function submitForm() {
-  proxy.$refs["plm_projectRef"].validate(valid => {
-    if (valid) {
-      if (form.value.id != null) {
-        updatePlm_project(form.value).then(response => {
-          proxy.$modal.msgSuccess("修改成功");
-          open.value = false;
-          getList();
-        });
-      } else {
-        addPlm_project(form.value).then(response => {
-          proxy.$modal.msgSuccess("新增成功");
-          open.value = false;
-          getList();
-        });
-      }
-    }
-  });
-}
-
-/** 删除按钮操作 */
-function handleDelete(row) {
-  const _ids = row.id || ids.value;
-  proxy.$modal.confirm('是否确认删除PLM项目编号为"' + _ids + '"的数据项？').then(function() {
-    return delPlm_project(_ids);
-  }).then(() => {
-    getList();
-    proxy.$modal.msgSuccess("删除成功");
-  }).catch(() => {});
-}
 
 /** 导出按钮操作 */
 function handleExport() {

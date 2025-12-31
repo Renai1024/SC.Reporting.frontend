@@ -55,6 +55,47 @@
             </div>
           </template>
           <el-collapse accordion>
+            <el-collapse-item title="v1.2.2 - 2025-12-24">
+              <ol>
+                <li>新增车间转序程序</li>
+                <li>新增车间转序数据报表</li>
+                <li>PLM定时任务新增：项目标记</li>
+                <li>新增端子压接机数据报表</li>
+                <li>修复了一些已知bug</li>
+                <li>其他细节优化</li>
+              </ol>
+            </el-collapse-item>
+            <el-collapse-item title="v1.2.1 - 2025-12-07">
+              <ol>
+                <li>新增气密性检测数据报表</li>
+                <li>扫码检验前端优化</li>
+                <li>扫码序列号格式校验</li>
+                <li>检验与箱码绑定页签拆分</li>
+                <li>新增查询已绑定箱码接口</li>
+              </ol>
+            </el-collapse-item>
+            <el-collapse-item title="v1.2.0 - 2025-11-21">
+              <ol>
+                <li>新增比亚迪数据报表</li>
+                <li>新增页签组件</li>
+                <li>报表取消鉴权</li>
+              </ol>
+            </el-collapse-item>
+            <el-collapse-item title="v1.10.0 - 2025-11-06">
+              <ol>
+                <li>新增焊接数据报表</li>
+                <li>新增批量新增接口</li>
+                <li>报表取消鉴权</li>
+              </ol>
+            </el-collapse-item>
+            <el-collapse-item title="v1.9.0 - 2025-10-24">
+              <ol>
+                <li>新增碳化硅自动锁螺丝数据报表</li>
+                <li>新增批量新增接口</li>
+                <li>报表取消鉴权</li>
+                <li>后端mybatis逻辑优化</li>
+              </ol>
+            </el-collapse-item>
             <el-collapse-item title="v1.8.0 - 2025-09-30">
               <ol>
                 <li>新增PDA扫码追溯</li>
@@ -128,7 +169,7 @@
 </template>
 
 <script setup name="Index">
-const version = ref('1.7.0')
+const version = ref('1.2.2')
 
 function goTarget(url) {
   window.open(url, '__blank')

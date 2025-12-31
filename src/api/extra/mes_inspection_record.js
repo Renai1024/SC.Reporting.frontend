@@ -9,6 +9,15 @@ export function listMes_inspection_record(query) {
   })
 }
 
+// 获取已绑箱码列表
+export function listMes_inspection_record_withBoxCode(query) {
+  return request({
+    url: '/extra/mes/report/mes_inspection_record/listBoxCode',
+    method: 'get',
+    params: query
+  })
+}
+
 // 查询检验数据详细
 export function getMes_inspection_record(id) {
   return request({

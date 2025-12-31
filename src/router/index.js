@@ -90,14 +90,72 @@ export const constantRoutes = [
     component: () => import('@/views/extra/mes_report_iqc/index.vue'),
     hidden: true,
     meta: {
-      title: '检验记录报表',
+      title: 'iqc生产数据报表',
       requireLight: true
     }
   },
   {
     path: '/report/mes/inspection_record',
     component: () => import('@/views/extra/mes_inspection_record/report.vue'),
-    hidden: true
+    hidden: true,
+    meta: {
+      title: '检验记录报表',
+      requireLight: true
+    }
+  },
+  {
+    path: '/report/mes/torque',
+    component: () => import('@/views/extra/torque/index.vue'),
+    hidden: true,
+    meta: {
+      title: '碳化硅自动锁螺丝数据报表',
+      requireLight: true
+    }
+  },
+  {
+    path: '/report/mes/weld_record',
+    component: () => import('@/views/extra/weld/index.vue'),
+    hidden: true,
+    meta: {
+      title: '焊接数据报表',
+      requireLight: true
+    }
+  },
+  {
+    path: '/report/mes/byd',
+    component: () => import('@/views/extra/mes_report_byd/index.vue'),
+    hidden: true,
+    meta: {
+      title: '比亚迪数据报表',
+      requireLight: true
+    }
+  },
+  {
+    path: '/report/mes/qimixing',
+    component: () => import('@/views/extra/mes_qimixing_record/index.vue'),
+    hidden: true,
+    meta: {
+      title: '气密性测试数据报表',
+      requireLight: true
+    }
+  },
+  {
+    path: '/report/mes/duanziyajieji',
+    component: () => import('@/views/extra/mes_report_duanziyajieji/index.vue'),
+    hidden: true,
+    meta: {
+      title: '端子压接机数据报表',
+      requireLight: true
+    }
+  },
+  {
+    path: '/report/mes/transpose',
+    component: () => import('@/views/extra/mes_workshop_transpose/report.vue'),
+    hidden: true,
+    meta: {
+      title: '车间转序数据报表',
+      requireLight: true
+    }
   }
 ]
 

@@ -92,15 +92,15 @@
           placeholder="请选择测试开始时间">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="测试结束时间" prop="testEndTime">
-        <el-date-picker clearable
-                        width="60px"
-          v-model="queryParams.testEndTime"
-          type="date"
-          value-format="YYYY-MM-DD"
-          placeholder="请选择测试结束时间">
-        </el-date-picker>
-      </el-form-item>
+<!--      <el-form-item label="测试结束时间" prop="testEndTime">-->
+<!--        <el-date-picker clearable-->
+<!--                        width="60px"-->
+<!--          v-model="queryParams.testEndTime"-->
+<!--          type="date"-->
+<!--          value-format="YYYY-MM-DD"-->
+<!--          placeholder="请选择测试结束时间">-->
+<!--        </el-date-picker>-->
+<!--      </el-form-item>-->
 <!--      <el-form-item label="测试结果" prop="testResult">-->
 <!--        <el-input-->
 <!--          v-model="queryParams.testResult"-->

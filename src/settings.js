@@ -52,6 +52,6 @@ export default {
   /**
    * 底部版权文本内容
    */
-  footerContent: 'Copyright © 2025 Miracle.Div Rights Reserved.'
+  footerContent: 'Copyright © 2025 Miracle.DEV Rights Reserved.'
 }
 
