@@ -55,6 +55,14 @@
             </div>
           </template>
           <el-collapse accordion>
+            <el-collapse-item title="v1.2.3 - 2026-01-04">
+              <ol>
+                <li>重构车间转序程序</li>
+                <li>直通率导入定时推送欣旺达SRM</li>
+                <li>修复了一些已知bug</li>
+                <li>其他细节优化</li>
+              </ol>
+            </el-collapse-item>
             <el-collapse-item title="v1.2.2 - 2025-12-24">
               <ol>
                 <li>新增车间转序程序</li>
@@ -169,7 +177,7 @@
 </template>
 
 <script setup name="Index">
-const version = ref('1.2.2')
+const version = ref('1.2.3')
 
 function goTarget(url) {
   window.open(url, '__blank')

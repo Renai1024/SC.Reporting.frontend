@@ -113,14 +113,14 @@
         </template>
       </el-table-column>
       <el-table-column label="收料人员" align="center" prop="receiverPerson" min-width="120" show-overflow-tooltip/>
-      <el-table-column label="是否转序" align="center" prop="isTransferred"min-width="120" show-overflow-tooltip>
+      <el-table-column label="是否转序" align="center" prop="ifTransferred" min-width="120" show-overflow-tooltip>
         <template #default="scope">
-          <dict-tag :options="sys_yes_no" :value="scope.row.isTransferred"/>
+          <dict-tag :options="sys_yes_no" :value="scope.row.ifTransferred"/>
         </template>
       </el-table-column>
-      <el-table-column label="是否收料" align="center" prop="isConfirmed" min-width="120" show-overflow-tooltip>
+      <el-table-column label="是否收料" align="center" prop="ifConfirmed" min-width="120" show-overflow-tooltip>
         <template #default="scope">
-          <dict-tag :options="sys_yes_no" :value="scope.row.isConfirmed"/>
+          <dict-tag :options="sys_yes_no" :value="scope.row.ifConfirmed"/>
         </template>
       </el-table-column>
       <el-table-column label="备注" align="center" prop="remark" min-width="200" show-overflow-tooltip/>
@@ -176,8 +176,8 @@ const data = reactive({
     confirmStartTime: null,
     confirmEndTime: null,
     receiverPerson: null,
-    isTransferred: null,
-    isConfirmed: null,
+    ifTransferred: null,
+    ifConfirmed: null,
   },
   rules: {
     materialCode: [
@@ -251,8 +251,8 @@ function reset() {
     transferPerson: null,
     confirmTime: null,
     receiverPerson: null,
-    isTransferred: null,
-    isConfirmed: null,
+    ifTransferred: null,
+    ifConfirmed: null,
     createBy: null,
     createTime: null,
     updateBy: null,

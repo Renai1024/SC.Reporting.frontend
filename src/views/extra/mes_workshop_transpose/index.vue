@@ -86,11 +86,11 @@
                 </div>
                 <div class="item-row">
                   <span class="label">是否转序:</span>
-                  <dict-tag :options="sys_yes_no" :value="item.isTransferred" class="dict-tag" />
+                  <dict-tag :options="sys_yes_no" :value="item.ifTransferred" class="dict-tag" />
                 </div>
                 <div class="item-row">
                   <span class="label">是否收料:</span>
-                  <dict-tag :options="sys_yes_no" :value="item.isConfirmed" class="dict-tag" />
+                  <dict-tag :options="sys_yes_no" :value="item.ifConfirmed" class="dict-tag" />
                 </div>
                 <div class="item-row">
                   <span class="label">备注:</span>
@@ -100,7 +100,7 @@
 
               <div class="item-actions">
                 <el-button
-                    v-if="item.isConfirmed === 'N' || item.isConfirmed === null"
+                    v-if="item.ifConfirmed === 'N' || item.ifConfirmed === null"
                     link
                     type="primary"
                     icon="Edit"
@@ -110,7 +110,7 @@
               </div>
               <div class="item-actions">
                 <el-button
-                    v-if="item.isConfirmed === 'N' || item.isConfirmed === null"
+                    v-if="item.ifConfirmed === 'N' || item.ifConfirmed === null"
                     link
                     type="danger"
                     icon="Delete"
@@ -197,11 +197,11 @@
                 </div>
                 <div class="item-row">
                   <span class="label">是否转序:</span>
-                  <dict-tag :options="sys_yes_no" :value="item.isTransferred" class="dict-tag" />
+                  <dict-tag :options="sys_yes_no" :value="item.ifTransferred" class="dict-tag" />
                 </div>
                 <div class="item-row">
                   <span class="label">是否确认:</span>
-                  <dict-tag :options="sys_yes_no" :value="item.isConfirmed" class="dict-tag" />
+                  <dict-tag :options="sys_yes_no" :value="item.ifConfirmed" class="dict-tag" />
                 </div>
                 <div class="item-row">
                   <span class="label">备注:</span>
@@ -602,8 +602,8 @@ const transferQueryParams = ref({
   transferPerson: null,
   confirmTime: null,
   receiverPerson: null,
-  isTransferred: null,
-  isConfirmed: null
+  ifTransferred: null,
+  ifConfirmed: null
 });
 
 // 收料确认查询参数
@@ -620,8 +620,8 @@ const receiveQueryParams = ref({
   transferPerson: null,
   confirmTime: null,
   receiverPerson: null,
-  isTransferred: 'Y', // 只查询已转序的数据
-  isConfirmed: 'N' // 只查询未确认的数据
+  ifTransferred: 'Y', // 只查询已转序的数据
+  ifConfirmed: 'N' // 只查询未确认的数据
 });
 
 // 转序对话框相关变量
@@ -637,7 +637,7 @@ const transferForm = ref({
   transferTime: "",
   transferPerson: "",
   remark: "",
-  isTransferred: "1" // 默认已转序
+  ifTransferred: "1" // 默认已转序
 });
 
 // 修改转序数量对话框相关变量
@@ -645,7 +645,7 @@ const transferQuantityEditOpen = ref(false);
 const transferQuantityEditFormRef = ref();
 const transferQuantityEditForm = ref({
   id: null,
-  isTransferred: "1"
+  ifTransferred: "1"
 });
 
 const transferQuantityEditRules = {
@@ -707,8 +707,8 @@ const receiveForm = ref({
   transferPerson: null,
   confirmTime: "",
   receiverPerson: "",
-  isTransferred: "1",
-  isConfirmed: "1",
+  ifTransferred: "1",
+  ifConfirmed: "1",
   remark: null
 });
 
@@ -833,8 +833,8 @@ function resetTransferForm() {
     transferPerson: "",
     confirmTime: null,
     receiverPerson: null,
-    isTransferred: "1",
-    isConfirmed: null,
+    ifTransferred: "1",
+    ifConfirmed: null,
     remark: null
   };
   if (transferFormRef.value) {
@@ -855,8 +855,8 @@ function resetReceiveForm() {
     transferPerson: null,
     confirmTime: "",
     receiverPerson: "",
-    isTransferred: "1",
-    isConfirmed: "1",
+    ifTransferred: "1",
+    ifConfirmed: "1",
     remark: null
   };
   if (receiveFormRef.value) {
@@ -878,7 +878,7 @@ function handleEditTransferQuantity(row) {
   }
 
   // 检查确认状态，只有未确认的才允许修改
-  if (row.isConfirmed !== 'N' && row.isConfirmed !== null) {
+  if (row.ifConfirmed !== 'N' && row.ifConfirmed !== null) {
     proxy.$modal.msgWarning("只有未确认的数据才能修改数量");
     return;
   }
@@ -886,7 +886,7 @@ function handleEditTransferQuantity(row) {
   // 获取完整数据
   getMes_workshop_transpose(row.id).then(response => {
     // 再次检查确认状态
-    if (response.data.isConfirmed !== 'N' && response.data.isConfirmed !== null) {
+    if (response.data.ifConfirmed !== 'N' && response.data.ifConfirmed !== null) {
       proxy.$modal.msgWarning("只有未确认的数据才能修改数量");
       return;
     }
@@ -1193,7 +1193,7 @@ function submitTransferForm() {
   transferFormRef.value.validate(valid => {
     if (valid) {
       // 确保状态正确
-      transferForm.value.isTransferred = "1";
+      transferForm.value.ifTransferred = "1";
 
       if (transferForm.value.id != null) {
         updateMes_workshop_transpose(transferForm.value).then(response => {
@@ -1229,8 +1229,8 @@ function submitReceiveForm() {
   receiveFormRef.value.validate(valid => {
     if (valid) {
       // 确保状态正确
-      receiveForm.value.isTransferred = "1";
-      receiveForm.value.isConfirmed = "1";
+      receiveForm.value.ifTransferred = "1";
+      receiveForm.value.ifConfirmed = "1";
 
       if (receiveForm.value.id != null) {
         updateMes_workshop_transpose(receiveForm.value).then(response => {
